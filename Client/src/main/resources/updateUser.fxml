@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane id="main" prefHeight="437.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Client.controller.UpdateController">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+    <center>
+<GridPane alignment="CENTER" hgap="10" opacity="0.79" style="-fx-background-color: black; -fx-border-color: none; -fx-background-radius: 10;" vgap="10">
+    <GridPane.margin>
+        <Insets bottom="20" left="0" right="0" top="20" />
+    </GridPane.margin>
+    <BorderPane.margin>
+        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+    </BorderPane.margin>
+    <children>
+             <Button centerShape="false" mnemonicParsing="false" onAction="#clickChangeButton" prefHeight="18.0" prefWidth="145.0" style="-fx-background-color: #2f2b2b; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10;" text="Change" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                 <font>
+                     <Font name="System Bold" size="20.0" />
+                 </font>
+                 <textFill>
+                     <RadialGradient centerX="0.5" centerY="0.5190476190476191" cycleMethod="REFLECT" radius="0.20930232558139533">
+                         <stops>
+                             <Stop>
+                                 <color>
+                                     <Color red="0.6353790760040283" green="1.0" />
+                                 </color>
+                             </Stop>
+                             <Stop offset="1.0">
+                                 <color>
+                                     <Color red="0.916967511177063" green="1.0" />
+                                 </color>
+                             </Stop>
+                         </stops>
+                     </RadialGradient>
+                 </textFill>
+             </Button>
+            <Label prefHeight="33.0" prefWidth="105.0" text="Username :" textFill="#ffe100" GridPane.columnIndex="0" GridPane.rowIndex="0">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <TextField fx:id="usernameField" prefHeight="36.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label prefHeight="33.0" prefWidth="106.0" text="Password :" textFill="#ffe100" GridPane.columnIndex="0" GridPane.rowIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="passwordField" prefHeight="36.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="infoLabel" layoutX="538.0" prefWidth="108.0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Button fx:id="deleteButton" alignment="CENTER_RIGHT" centerShape="false" mnemonicParsing="false" onAction="#clickDeleteButton" prefHeight="18.0" prefWidth="145.0" style="-fx-background-color: #2f2b2b; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10;" text="Delete User" textFill="#a41e1e" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints></GridPane>
+    </center>
+    <bottom>
+        <ToolBar opacity="0.8" style="-fx-background-color: black">
+            <Button fx:id="backButton" centerShape="false" layoutX="316.0" layoutY="-4.0" mnemonicParsing="false" onAction="#clickBackButton" prefHeight="36.0" prefWidth="169.0" style="-fx-background-color: firebrick; -fx-border-radius: none; -fx-background-radius: 10;" text="Back To Menu" textFill="WHITE" BorderPane.alignment="BOTTOM_CENTER">
+                <font>
+                    <Font name="System Bold" size="15.0" />
+                </font>
+            </Button>
+            <Pane opacity="0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="exitButton" centerShape="false" layoutX="631.0" layoutY="-4.0" mnemonicParsing="false" onAction="#clickExitButton" prefHeight="36.0" prefWidth="169.0" style="-fx-background-color: firebrick; -fx-border-radius: none; -fx-background-radius: 10;" text="Exit Game" textFill="WHITE" BorderPane.alignment="CENTER">
+                <font>
+                    <Font name="System Bold" size="15.0" />
+                </font>
+            </Button>
+        </ToolBar>
+    </bottom>
+</BorderPane>

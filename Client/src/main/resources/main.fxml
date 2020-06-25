@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane id="main" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Client.controller.MainController">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+   <center>
+          <VBox fx:id="menuButtons" alignment="CENTER" maxHeight="258.0" maxWidth="253.0" opacity="0.8" prefHeight="185.0" prefWidth="253.0" spacing="10" style="-fx-background-color: black; -fx-border-color: none; -fx-background-radius: 10;" BorderPane.alignment="CENTER">
+          <BorderPane.margin>
+              <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+          </BorderPane.margin>
+              <Button fx:id="playButton" centerShape="false" mnemonicParsing="false" onAction="#clickPlayButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #2f2b2b; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10;" text="Play">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            <textFill>
+               <RadialGradient centerX="0.5" centerY="0.5190476190476191" cycleMethod="REFLECT" radius="0.20930232558139533">
+                  <stops>
+                     <Stop>
+                        <color>
+                           <Color red="0.6353790760040283" green="1.0" />
+                        </color>
+                     </Stop>
+                     <Stop offset="1.0">
+                        <color>
+                           <Color red="0.916967511177063" green="1.0" />
+                        </color>
+                     </Stop>
+                  </stops>
+               </RadialGradient>
+            </textFill>
+            </Button>
+          <Button fx:id="leaderButton" centerShape="false" mnemonicParsing="false" onAction="#clickLeaderButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #2f2b2b; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10;" text="LeaderBoard">
+              <font>
+                  <Font name="System Bold" size="20.0" />
+              </font>
+            <textFill>
+               <RadialGradient centerX="0.5" centerY="0.5190476190476191" cycleMethod="REFLECT" radius="0.20930232558139533">
+                  <stops>
+                     <Stop>
+                        <color>
+                           <Color red="0.6353790760040283" green="1.0" />
+                        </color>
+                     </Stop>
+                     <Stop offset="1.0">
+                        <color>
+                           <Color red="0.916967511177063" green="1.0" />
+                        </color>
+                     </Stop>
+                  </stops>
+               </RadialGradient>
+            </textFill>
+          </Button>
+          <Button fx:id="updateButton" centerShape="false" mnemonicParsing="false" onAction="#clickUpdateButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #2f2b2b; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10;" text="Update User">
+                  <font>
+                      <Font name="System Bold" size="20.0" />
+                  </font>
+            <textFill>
+               <RadialGradient centerX="0.5" centerY="0.5190476190476191" cycleMethod="REFLECT" radius="0.20930232558139533">
+                  <stops>
+                     <Stop>
+                        <color>
+                           <Color red="0.6353790760040283" green="1.0" />
+                        </color>
+                     </Stop>
+                     <Stop offset="1.0">
+                        <color>
+                           <Color red="0.916967511177063" green="1.0" />
+                        </color>
+                     </Stop>
+                  </stops>
+               </RadialGradient>
+            </textFill>
+              </Button>
+          </VBox>
+   </center>
+    <bottom>
+            <ToolBar opacity="0.8" style="-fx-background-color: black">
+                <Pane opacity="0" HBox.hgrow="ALWAYS" />
+                <Button fx:id="exitButton" centerShape="false" mnemonicParsing="false" onAction="#clickExitButton" prefHeight="36.0" prefWidth="169.0" style="-fx-background-color: firebrick; -fx-border-radius: none; -fx-background-radius: 10;" text="Exit Game" textFill="WHITE" BorderPane.alignment="BOTTOM_RIGHT">
+                <font>
+                    <Font name="System Bold" size="15.0" />
+                </font>
+            </Button>
+            </ToolBar>
+    </bottom>
+</BorderPane>

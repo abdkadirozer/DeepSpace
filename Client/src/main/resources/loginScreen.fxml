@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="center" blendMode="DARKEN" hgap="10" style="-fx-background-color: dimgrey;" vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Client.controller.LoginScreenController">
+<padding><Insets bottom="40" left="40" right="40" top="40" /></padding>
+<columnConstraints>
+    <ColumnConstraints halignment="RIGHT" maxWidth="Infinity" minWidth="100" prefWidth="100">
+    </ColumnConstraints>
+    <ColumnConstraints hgrow="ALWAYS" maxWidth="Infinity" minWidth="200" prefWidth="200">
+    </ColumnConstraints>
+</columnConstraints>
+
+<!-- Add Header Label -->
+<Label text="Deep Space" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.rowSpan="1">
+    <font>
+        <Font name="System Bold" size="35.0" />
+    </font>
+    <textFill>
+        <RadialGradient centerX="0.5" centerY="0.5190476190476191" cycleMethod="REFLECT" radius="0.20930232558139533">
+            <stops>
+                <Stop>
+                    <color>
+                        <Color red="0.6353790760040283" green="1.0" />
+                    </color>
+                </Stop>
+                <Stop offset="1.0">
+                    <color>
+                        <Color red="0.916967511177063" green="1.0" />
+                    </color>
+                </Stop>
+            </stops>
+        </RadialGradient>
+    </textFill>
+    <GridPane.margin>
+        <Insets bottom="20" left="0" right="0" top="20" />
+    </GridPane.margin>
+</Label>
+
+
+
+<!-- Add Username Label -->
+<Label text="Username : " textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="1">
+</Label>
+<!-- Add Name Text Field -->
+<TextField fx:id="usernameField" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+<!-- Add Password Label -->
+<Label text="Password : " textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="2">
+</Label>
+<!-- Add Password Field -->
+<PasswordField fx:id="passwordField" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+
+<!-- Add Login Button -->
+<Button fx:id="loginButton" defaultButton="true" onAction="#clickLoginButton" prefHeight="25.0" prefWidth="152.0" text="Login" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.rowSpan="1">
+</Button>
+    <!-- Add SignUp Button -->
+    <Button fx:id="signUpButton" contentDisplay="TEXT_ONLY" onAction="#clickSignUpButton" prefWidth="100" text="SignUp" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+    </Button>
+    <Label fx:id="infoLabel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+</GridPane>
