@@ -1,10 +1,10 @@
-package com.example.Server.api;
+package com.example.server.controller;
 
 
-import com.example.Server.model.User;
-import com.example.Server.service.UserService;
+import com.example.server.model.User;
+import com.example.server.model.request.UserAddRequest;
+import com.example.server.service.UserService;
 import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,21 +16,20 @@ import java.util.Map;
 @Api(tags = {"User Operations"})
 @SwaggerDefinition(tags = {
         @Tag(name = "User Operations", description = "Operations pertaining to users in our Game")})
-@RequestMapping(value = "/user")
+@RequestMapping("/user")
 public class UserController {
-    @Autowired
-    UserService userService;
+
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
 
     @ApiOperation(value = "Signup operation for users.", response = User.class)
     @PostMapping(value = "/signup")
-    public ResponseEntity<User> addUser(@RequestBody User user){
-        if(user.getUserName().equals(""))
-            return ResponseEntity.badRequest().body(null);
-        else if(user.getPassword().equals(""))
-            return ResponseEntity.badRequest().body(null);
-
-        User tmp = this.userService.addUser(user);
+    public ResponseEntity<User> addUser(@RequestBody UserAddRequest request){
+        User tmp = this.userService.addUser(request.toUser());
         if(tmp == null)
             return ResponseEntity.badRequest().body(null);
         else

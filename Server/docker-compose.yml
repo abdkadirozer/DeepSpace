@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: deep-space
+    environment:
+      MARIADB_DATABASE: deep-space
+      MARIADB_ROOT_PASSWORD: root123
+    ports:
+      - "3306:3306"

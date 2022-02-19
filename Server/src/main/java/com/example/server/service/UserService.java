@@ -1,6 +1,6 @@
-package com.example.Server.service;
+package com.example.server.service;
 
-import com.example.Server.model.User;
+import com.example.server.model.User;
 
 import java.util.List;
 import java.util.Map;
