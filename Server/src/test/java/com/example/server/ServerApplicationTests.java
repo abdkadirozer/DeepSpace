@@ -6,7 +6,6 @@ import com.example.server.model.request.UserAddRequest;
 import com.example.server.service.ScoreService;
 import com.example.server.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +19,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static com.example.server.model.User.UserBuilder.anUser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -55,25 +53,25 @@ class ServerApplicationTests {
     @BeforeEach
     public void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-        user = anUser()
-                .setUsername("ali")
-                .setPassword("pass")
+        user = User.builder()
+                .username("ali")
+                .password("pass")
                 .build();
-        user1 = anUser()
-                .setUsername("veli")
-                .setPassword("pass1")
+        user1 = User.builder()
+                .username("veli")
+                .password("pass1")
                 .build();
-        user2 = anUser()
-                .setUsername("firat")
-                .setPassword("2222")
+        user2 = User.builder()
+                .username("firat")
+                .password("2222")
                 .build();
-        user3 = anUser()
-                .setUsername("ece")
-                .setPassword("pass3")
+        user3 = User.builder()
+                .username("ece")
+                .password("pass3")
                 .build();
-        user4 = anUser()
-                .setUsername("ayse")
-                .setPassword("pass4")
+        user4 = User.builder()
+                .username("ayse")
+                .password("pass4")
                 .build();
 
         score = new Score(user, 100);

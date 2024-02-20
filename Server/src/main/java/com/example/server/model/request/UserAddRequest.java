@@ -7,8 +7,6 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 
-import static com.example.server.model.User.UserBuilder.anUser;
-
 @AllArgsConstructor
 @Getter
 public class UserAddRequest {
@@ -21,9 +19,9 @@ public class UserAddRequest {
     private String password;
 
     public User toUser() {
-        return anUser()
-                .setUsername(this.username)
-                .setPassword(this.password)
+        return User.builder()
+                .username(this.username)
+                .password(this.password)
                 .build();
     }
 }

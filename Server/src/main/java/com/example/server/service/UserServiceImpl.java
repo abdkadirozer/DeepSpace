@@ -3,12 +3,9 @@ package com.example.server.service;
 import com.example.server.model.User;
 import com.example.server.model.request.UserAddRequest;
 import com.example.server.repository.UserJpaRepo;
+import com.example.server.utils.SecurityUtils;
 import org.springframework.stereotype.Service;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -34,8 +31,9 @@ public class UserServiceImpl implements UserService {
     public User addUser(User user) {
         if (findUser(user.getUsername()) == null) {
             try {
-                user.setSalt(getSalt());
-                user.setPassword(getSecurePassword(user.getPassword(), user.getSalt()));
+                byte[] salt = SecurityUtils.generateSalt();
+                user.setSalt(SecurityUtils.toHex(salt));
+                user.setPassword(SecurityUtils.generateSecurePassword(user.getPassword(), salt));
                 user = userJpaRepo.save(user);
             } catch (Exception e) {
                 return null;
@@ -67,8 +65,10 @@ public class UserServiceImpl implements UserService {
         if (u != null) {
             if (input.get("username") != null)
                 u.setUsername(input.get("username"));
-            if (input.get("password") != null)
-                u.setPassword(getSecurePassword(input.get("password"), u.getSalt()));
+            if (input.get("password") != null){
+                byte[] salt = SecurityUtils.fromHex(u.getSalt());
+                u.setPassword(SecurityUtils.generateSecurePassword(input.get("password"), salt));
+            }
         }
         assert u != null;
         return userJpaRepo.save(u);
@@ -96,19 +96,18 @@ public class UserServiceImpl implements UserService {
     /**
      * This method is used to provide login functionality to the user.
      *
-     * @param user
+     * @param request
      * @return session_id which only belongs to the logged in user.
      */
     @Override
     public String login(UserAddRequest request) {
         User temp = this.findUser(request.getUsername());
         if (temp != null) {
-            byte[] salt = temp.getSalt();
-            String regeneratedPassword = getSecurePassword(request.getPassword(), salt);
+            String regeneratedPassword = SecurityUtils.generateSecurePassword(request.getPassword(), SecurityUtils.fromHex(temp.getSalt()));
             if (temp.getPassword().equals(regeneratedPassword)) {
                 String session_id = UUID.randomUUID().toString();
                 temp.setSession(session_id);
-                temp.setLast_login(LocalDateTime.now());
+                temp.setLastLogin(LocalDateTime.now());
                 userJpaRepo.save(temp);
                 return session_id;
             }
@@ -125,55 +124,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUser(String username) {
         return userJpaRepo.findByUsername(username).orElse(null);
-    }
-
-    /**
-     * This method implements Java MD5 password hashing with salt.
-     *
-     * @param passwordToHash
-     * @param salt
-     * @return hashed version of the password.
-     */
-    private static String getSecurePassword(String passwordToHash, byte[] salt) {
-        String generatedPassword = null;
-        try {
-            // Create MessageDigest instance for MD5
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            //Add password bytes to digest
-            md.update(salt);
-            //Get the hash's bytes
-            byte[] bytes = md.digest(passwordToHash.getBytes());
-            //This bytes[] has bytes in decimal format;
-            //Convert it to hexadecimal format
-            StringBuilder sb = new StringBuilder();
-            for (byte aByte : bytes) {
-                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
-            }
-            //Get complete hashed password in hex format
-            generatedPassword = sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return generatedPassword;
-    }
-
-    //Add salt
-
-    /**
-     * This method is used to get the salt value for password hashing implementation.
-     *
-     * @return the generated salt value.
-     * @throws NoSuchAlgorithmException
-     * @throws NoSuchProviderException
-     */
-    private static byte[] getSalt() throws NoSuchAlgorithmException, NoSuchProviderException {
-        //Always use a SecureRandom generator
-        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG", "SUN");
-        //Create array for salt
-        byte[] salt = new byte[16];
-        //Get a random salt
-        sr.nextBytes(salt);
-        //return salt
-        return salt;
     }
 }
