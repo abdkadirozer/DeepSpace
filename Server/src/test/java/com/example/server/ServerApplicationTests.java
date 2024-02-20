@@ -6,6 +6,7 @@ import com.example.server.model.request.UserAddRequest;
 import com.example.server.service.ScoreService;
 import com.example.server.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -84,8 +85,9 @@ class ServerApplicationTests {
     @Test
     public void sign_upScenario() throws Exception {
         int old_size = userService.getAllUsers().size();
+        UserAddRequest request = new UserAddRequest("ali", "12345");
         this.mockMvc.perform(post("/user/signup").contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(user)));
+                .content(objectMapper.writeValueAsString(request)));
         int new_size = userService.getAllUsers().size();
         // True ,if user list size is increased after signing up.
         assertEquals(old_size + 1, new_size);
@@ -102,14 +104,14 @@ class ServerApplicationTests {
                 .content(objectMapper.writeValueAsString(invalid_request)));
         int new_size = userService.getAllUsers().size();
         // True ,if user list size is not increased trying signing up.
-        String session = userService.login(user);
-        userService.deleteUser(user.getUsername(), session);
+        String session = userService.login(invalid_request);
+        userService.deleteUser(invalid_request.getUsername(), session);
         assertEquals(old_size, new_size);
     }
 
     @Test
     public void loginScenario() throws Exception {
-        String input = objectMapper.writeValueAsString(user3);
+        String input = objectMapper.writeValueAsString(new UserAddRequest(user3.getUsername(), user3.getPassword()));
         this.userService.addUser(user3);
         MvcResult mvcResult = this.mockMvc.perform(post("/user/login").contentType(MediaType.APPLICATION_JSON)
                 .content(input)).andReturn();

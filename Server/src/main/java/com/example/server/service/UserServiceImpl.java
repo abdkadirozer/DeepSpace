@@ -1,6 +1,7 @@
 package com.example.server.service;
 
 import com.example.server.model.User;
+import com.example.server.model.request.UserAddRequest;
 import com.example.server.repository.UserJpaRepo;
 import org.springframework.stereotype.Service;
 
@@ -99,11 +100,11 @@ public class UserServiceImpl implements UserService {
      * @return session_id which only belongs to the logged in user.
      */
     @Override
-    public String login(User user) {
-        User temp = this.findUser(user.getUsername());
+    public String login(UserAddRequest request) {
+        User temp = this.findUser(request.getUsername());
         if (temp != null) {
             byte[] salt = temp.getSalt();
-            String regeneratedPassword = getSecurePassword(user.getPassword(), salt);
+            String regeneratedPassword = getSecurePassword(request.getPassword(), salt);
             if (temp.getPassword().equals(regeneratedPassword)) {
                 String session_id = UUID.randomUUID().toString();
                 temp.setSession(session_id);

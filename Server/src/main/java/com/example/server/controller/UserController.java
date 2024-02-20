@@ -71,7 +71,7 @@ public class UserController {
             @ApiResponse(code = 200, message = "User is logged in successfully."),
             @ApiResponse(code = 400, message = "Wrong username or password.")})
     @PostMapping("/login")
-    public  ResponseEntity<String> login(@RequestBody User user)
+    public  ResponseEntity<String> login(@RequestBody UserAddRequest user)
     {
         String session = this.userService.login(user);
         if(session != null) {
