@@ -1,5 +1,0 @@
-com\example\game\gameServer\Main.class
-com\example\game\gameServer\Client.class
-com\example\game\gameServer\GameInstance.class
-com\example\game\gameServer\GameInstance$ClientListener.class
-com\example\game\gameServer\ConnectionHandler.class
